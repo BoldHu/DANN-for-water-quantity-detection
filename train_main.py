@@ -143,14 +143,32 @@ def main():
     # Plotting the loss values
     plt.figure(figsize=(10, 5))
     plt.plot(err_s_label_list, label='Source Label Loss')
-    plt.plot(err_s_domain_list, label='Source Domain Loss')
-    plt.plot(err_t_domain_list, label='Target Domain Loss')
+    plt.plot(err_test_list, label='Target Lable Loss')
     plt.xlabel('Iteration')
     plt.ylabel('Loss')
     plt.title('Training Losses')
     plt.legend()
-    plt.show()
-
+    plt.savefig('figures/train label losses.png')
+    
+    # plotting the domain loss
+    plt.figure(figsize=(10, 5))
+    plt.plot(err_s_domain_list, label='Source Domain Loss')
+    plt.plot(err_t_domain_list, label='Target Domain Loss')
+    plt.xlabel('Iteration')
+    plt.ylabel('Loss')
+    plt.title('Domain Losses')
+    plt.legend()
+    plt.savefig('figures/domain losses.png')
+    
+    # plotting the test results
+    plt.figure(figsize=(10, 5))
+    plt.plot(r2_test_list, label='R2 Score')
+    plt.plot(rmse_test_list, label='RMSE')
+    plt.xlabel('Epoch')
+    plt.ylabel('Value')
+    plt.title('Test Results')
+    plt.legend()
+    plt.savefig('figures/test results.png')
 
 if __name__ == '__main__':
     main()
