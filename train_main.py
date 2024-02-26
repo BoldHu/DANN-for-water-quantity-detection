@@ -17,8 +17,8 @@ def main():
     
     cudnn.benchmark = True
     lr = 1e-3
-    batch_size = 32
-    n_epoch = 3
+    batch_size = 128
+    n_epoch = 500
 
     manual_seed = 42
     random.seed(manual_seed)
@@ -33,13 +33,13 @@ def main():
         dataset=source_dataset,
         batch_size=batch_size,
         shuffle=True,
-        num_workers=8)
+        num_workers=32)
 
     dataloader_target = torch.utils.data.DataLoader(
         dataset=target_dataset,
         batch_size=batch_size,
         shuffle=True,
-        num_workers=8)
+        num_workers=32)
     
     print('read the data from the dataset')
 

@@ -8,12 +8,12 @@ def test(my_net, loss_reg, epoch, device):
 
     cuda = True
     cudnn.benchmark = True
-    batch_size = 32
+    batch_size = 128
     alpha = 0
 
     my_net = my_net.eval()
     
-    if device == 'cuda':
+    if device.type == 'cuda':
         my_net = my_net.to(device)
     
     test_dataset_name = 'X_kla240.mat'
@@ -24,7 +24,7 @@ def test(my_net, loss_reg, epoch, device):
         dataset=test_dataset,
         batch_size=batch_size,
         shuffle=True,
-        num_workers=8)
+        num_workers=32)
     
     len_dataloader = len(dataloader_test)
     
@@ -37,7 +37,7 @@ def test(my_net, loss_reg, epoch, device):
 
             batch_size = len(test_labels)
             
-            if device == 'cuda':
+            if device.type == 'cuda':
                 test_features = test_features.to(device)
                 test_labels = test_labels.to(device)
 
