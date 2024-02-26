@@ -7,8 +7,8 @@ import torch
 
 class GetLoader(data.Dataset):
     def __init__(self, data_root, data_label_root, transform=None):
-        self.data_root = os.path.join("D:\python_project\WWTP soft-sensing\Data", data_root)
-        self.data_label_root = os.path.join("D:\python_project\WWTP soft-sensing\Data", data_label_root)
+        self.data_root = os.path.join("./Data", data_root)
+        self.data_label_root = os.path.join("./Data", data_label_root)
         self.transform = transform
         
         # load data

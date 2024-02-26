@@ -18,7 +18,7 @@ def main():
     cudnn.benchmark = True
     lr = 1e-3
     batch_size = 32
-    n_epoch = 100
+    n_epoch = 3
 
     manual_seed = 42
     random.seed(manual_seed)
@@ -33,13 +33,13 @@ def main():
         dataset=source_dataset,
         batch_size=batch_size,
         shuffle=True,
-        num_workers=16)
+        num_workers=8)
 
     dataloader_target = torch.utils.data.DataLoader(
         dataset=target_dataset,
         batch_size=batch_size,
         shuffle=True,
-        num_workers=16)
+        num_workers=8)
     
     print('read the data from the dataset')
 
@@ -71,19 +71,23 @@ def main():
     err_s_label_list = []
     err_s_domain_list = []
     err_t_domain_list = []
+    err_test_list = []
+    r2_test_list = []
+    rmse_test_list = []
 
     for epoch in range(n_epoch):
         i = 0
         dataloader_source_iter = iter(dataloader_source)
         dataloader_target_iter = iter(dataloader_target)
-        
+        # training mode
+        my_net = my_net.train()
         while i < len_dataloader:
             
             # get data from source and target datasets
             data_source= next(dataloader_source_iter)
             source_feature, source_label = data_source
             data_target = next(dataloader_target_iter)
-            target_feature, _ = data_target
+            target_feature, target_label = data_target
 
             p = float(i + epoch * len_dataloader) / n_epoch / len_dataloader
             alpha = 2. / (1. + np.exp(-10 * p)) - 1
@@ -127,6 +131,12 @@ def main():
             i += 1
         # save model in saved_models directory
         torch.save(my_net, '{0}/DANN_model_epoch_{1}.pth'.format('saved_models', epoch))
+        
+        # test the model
+        r2, rmse, regres_loss = test(my_net, loss_reg, epoch, device)
+        err_test_list.append(regres_loss)
+        r2_test_list.append(r2)
+        rmse_test_list.append(rmse)
 
     print('done')
 
