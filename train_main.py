@@ -74,6 +74,7 @@ def main():
     err_test_list = []
     r2_test_list = []
     rmse_test_list = []
+    err_s_label_epoch = 0
 
     for epoch in range(n_epoch):
         i = 0
@@ -124,11 +125,12 @@ def main():
                 err_s_domain.item(), err_t_domain.item()))
 
             # Append loss values to lists for plotting
-            err_s_label_list.append(err_s_label.item())
+            err_s_label_epoch += err_s_label.item()
             err_s_domain_list.append(err_s_domain.item())
             err_t_domain_list.append(err_t_domain.item())
 
             i += 1
+        err_s_label_list.append(err_s_label_epoch / len_dataloader)
         # save model in saved_models directory
         torch.save(my_net, '{0}/DANN_model_epoch_{1}.pth'.format('saved_models', epoch))
         
@@ -152,23 +154,31 @@ def main():
     
     # plotting the domain loss
     plt.figure(figsize=(10, 5))
-    plt.plot(err_s_domain_list, label='Source Domain Loss')
-    plt.plot(err_t_domain_list, label='Target Domain Loss')
+    plt.plot(err_s_domain_list, label='Source Domain Loss', color='r')
+    plt.plot(err_t_domain_list, label='Target Domain Loss', color='b', linestyle='--')
     plt.xlabel('Iteration')
     plt.ylabel('Loss')
     plt.title('Domain Losses')
     plt.legend()
     plt.savefig('figures/domain losses.png')
     
-    # plotting the test results
+    # plotting the r2
     plt.figure(figsize=(10, 5))
-    plt.plot(r2_test_list, label='R2 Score')
+    plt.plot(r2_test_list, label='R2')
+    plt.xlabel('Epoch')
+    plt.ylabel('R2')
+    plt.title('R2')
+    plt.legend()
+    plt.savefig('figures/r2.png')
+    
+    # plotting the rmse
+    plt.figure(figsize=(10, 5))
     plt.plot(rmse_test_list, label='RMSE')
     plt.xlabel('Epoch')
-    plt.ylabel('Value')
-    plt.title('Test Results')
+    plt.ylabel('RMSE')
+    plt.title('RMSE')
     plt.legend()
-    plt.savefig('figures/test results.png')
+    plt.savefig('figures/rmse.png')
 
 if __name__ == '__main__':
     main()
