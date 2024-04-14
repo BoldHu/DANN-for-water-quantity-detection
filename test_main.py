@@ -4,9 +4,8 @@ import torch.utils.data
 from reg_functions import reg_indicator
 from dataset.data_loader import GetLoader
 import random
-from remove_word import remove
 
-def test(source_feature, source_label, target_feature, target_label):
+def test_main(source_feature, source_label, target_feature, target_label, model):
 
     cuda = True
     cudnn.benchmark = True
@@ -32,10 +31,9 @@ def test(source_feature, source_label, target_feature, target_label):
     num_workers=32)
     len_dataloader = len(dataloader_test)
         
-    # load model in saved_models
-    source_dataset_name = remove(source_dataset_name)
-    target_dataset_name = remove(target_dataset_name)
-    my_net = torch.load(os.path.join('saved_models', 'DANN7_model_' + source_dataset_name + '_' + target_dataset_name + '.pth'))
+    # switch to evaluation mode
+    my_net = model
+    my_net.eval()
     
     # get the device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

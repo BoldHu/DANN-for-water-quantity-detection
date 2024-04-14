@@ -1,0 +1,12 @@
+source_dataset_name,target_dataset_name,source_r2,source_RMSE,source_label_loss,target_r2,target_RMSE,target_label_loss
+X_kla240.mat,X_mu0.7.mat,0.8945237538393807,7175.683967141544,56091730.0,0.8613589406013489,8123.22802734375,65986832.0
+source_dataset_name,target_dataset_name,source_r2,source_RMSE,source_label_loss,target_r2,target_RMSE,target_label_loss
+X_kla240.mat,X_mu0.9.mat,0.8945237433209139,7175.684311810662,56091729.88235294,0.8248079419136047,8882.30078125,78895264.0
+source_dataset_name,target_dataset_name,source_r2,source_RMSE,source_label_loss,target_r2,target_RMSE,target_label_loss
+X_kla360.mat,X_mu0.7.mat,0.8948723445920383,7199.659854664522,56397515.64705882,0.8770672082901001,7649.21044921875,58510424.0
+source_dataset_name,target_dataset_name,source_r2,source_RMSE,source_label_loss,target_r2,target_RMSE,target_label_loss
+X_kla360.mat,X_mu0.9.mat,0.8948723375797272,7199.659825942095,56397518.5882353,0.8369540572166443,8568.86328125,73425424.0
+source_dataset_name,target_dataset_name,source_r2,source_RMSE,source_label_loss,target_r2,target_RMSE,target_label_loss
+X_kla480.mat,X_mu0.7.mat,0.8950406400596395,7205.359690946691,56465322.0,0.88039231300354,7545.05224609375,56927816.0
+source_dataset_name,target_dataset_name,source_r2,source_RMSE,source_label_loss,target_r2,target_RMSE,target_label_loss
+X_kla480.mat,X_mu0.9.mat,0.8950406470719505,7205.359647863052,56465321.11764706,0.8388525247573853,8518.830078125,72570472.0
